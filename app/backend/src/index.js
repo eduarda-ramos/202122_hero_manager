@@ -7,7 +7,6 @@ const passportLocal = require('passport-local').Strategy;
 const passportHTTPBearer = require('passport-http-bearer').Strategy;
 const mongo = require('./database.js');
 const agenda = require('./agenda.js');
-const marvel = require('./marvel.js');
 const path = require('path');
 
 
@@ -55,7 +54,7 @@ const start = async() => {
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
-    // app.use('/', express.static(path.join(__dirname, '../../frontend/src')))
+    //app.use('/', express.static(path.join(__dirname, '../../frontend/src')))
 
     app.post('/api/signin', passport.authenticate('local', { session: false }), async(request, response) => {
         let user = request.user;
@@ -65,15 +64,6 @@ const start = async() => {
             if (err) return response.send({ error: 'db error' });
             return response.send({ token: user.token });
         }); 
-    });
-
-    app.post('/api/search', async(request, response) => {
-        let search = request.body.search;
-        console.log(`[Search] ${search}`);
-        let limit = request.body.limit || 10;
-        let offset = request.body.offset || 1;
-        let data = await marvel.searchComics(search, limit, offset);
-        return response.send(data);
     });
 
     app.post('/api/local', passport.authenticate('bearer', { session: false }), async(request, response) => {
@@ -101,13 +91,6 @@ const start = async() => {
         console.log("[Tracking] GET")
         return response.send(result);
     });
-
-    app.get('/api/comics/:seriesID', passport.authenticate('bearer', { session: false }), async(request, response) => {
-        let comicsDocuments = await mongo.getComicsForSeries(db.db, request.params.seriesID);
-        console.log("[Tracking] GET")
-        return response.send(comicsDocuments);
-    });
-
 
     app.get('/api/statistics', async(request, response) => {
         console.log("[Statistics] GET")

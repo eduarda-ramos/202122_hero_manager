@@ -4,11 +4,12 @@ services:
     container_name: hero_manager_database
     ports:
       - "27017:27017"
+
   hero_manager_backend:
     image: hero_manager_backend_image
     container_name: hero_manager_backend
     build:
-      context: ../../app/backend
+      context: ../../app/backend/
       dockerfile: ../../deployment/local/backend/Dockerfile
     volumes:
       - ../../app/backend/src:/app/backend/src
@@ -17,11 +18,24 @@ services:
     depends_on:
       - "hero_manager_database"
     environment:
-      - MARVEL_URL=https://gateway.marvel.com
       - DB_HOST=hero_manager_database
       - DB_PORT=27017
       - DB_NAME=heroManager
     env_file: .env
+
+  hero_manager_marvel:
+    image: hero_manager_marvel_image
+    container_name: hero_manager_marvel
+    build:
+      context: ../../app/services/marvel/
+      dockerfile: ../../../deployment/local/services/marvel/Dockerfile
+    volumes:
+      - ../../app/services/marvel/src:/app/services/marvel/src
+    ports:
+      - "8082:8080"
+    env_file: .env
+    environment:
+      - MARVEL_URL=https://gateway.marvel.com
 
   hero_manager_frontend:
     image: hero_manager_frontend_image
