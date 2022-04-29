@@ -1,5 +1,5 @@
 {
-    "name": "marvel_hero_marvel",
+    "name": "hero_manager_scheduler",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -7,7 +7,9 @@
     "license": "ISC",
     "dependencies": {
         "axios": "^0.21.1",
-        "cors": "^2.8.5",
-        "express": "^4.17.1"
+        "agenda": "^4.1.2",
+        "express": "^4.17.1",
+        "bcryptjs": "^2.4.3",
+        "mongodb": "^3.6.6"
     }
 }

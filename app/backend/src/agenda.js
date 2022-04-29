@@ -1,6 +1,6 @@
 const { Agenda } = require('agenda');
 const db = require('./database.js');
-
+const marvel = require('./marvel.js');
 
 const dbHost = process.env.DB_HOST || '127.0.0.1';
 const dbPort = process.env.BD_PORT || 27017;
@@ -27,9 +27,7 @@ const start = async(mongo) => {
             series: []
         }
         for (let series of seriesDocuments) {
-            //Alterada a linha abaixo pois a marvel é um serviço à parte
-            //Necessário fazer um pedido para conseguir os dados de cada série
-            let comics = axios.get('http://hero_manager_marvel:8080/api/marvel/comics/' + series)
+            let comics = await marvel.getComicsForSeries(series)
             for (let comic of comics) {
                 let comicDoc = await db.getComic(mongo.db, comic.id)
                 if (!comicDoc) {

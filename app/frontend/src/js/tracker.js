@@ -1,7 +1,6 @@
 //###############
 //CHANGE ME
 const BACKEND_URL = 'http://localhost:8081';
-const MARVEL_API_URL = 'http://localhost:8082';
 //###############
 
 const insertSearchResult = (comic, tbody) => {
@@ -89,7 +88,7 @@ const insertSeriesInTable = (seriesList) => {
 
         viewBtn.addEventListener('click', async(e) => {
             e.preventDefault();
-            const result = await axios.get(`${MARVEL_API_URL}/api/marvel/comics/${series.id}`);
+            const result = await axios.get(`${BACKEND_URL}/api/comics/${series.id}`);
             insertTableData(result.data);
         })
         deleteBtn.addEventListener('click', async(e) => {

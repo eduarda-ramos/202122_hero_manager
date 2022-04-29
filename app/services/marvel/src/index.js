@@ -2,12 +2,13 @@ const express = require('express');
 const cors = require('cors')
 const marvel = require('./marvel.js');
 
+
 const PORT = process.env.PORT || 8080;
 
 const start = async() => {
     console.log("Starting Node Server")
     const app = express();
-    
+
     app.use(cors())
 
     app.use(express.json());
@@ -22,9 +23,9 @@ const start = async() => {
         return response.send(data);
     });
 
-    //Vai buscar todos os comics e é dado a id da serie pretendida
-    app.get('/api/marvel/comics/:seriesID', async(request, response) => {
-        let comicsDocuments = await marvel.getComicsForSeries({id: request.params.seriesID});
+    app.post('/api/marvel/comics/:seriesID', async(request, response) => {
+        console.log(request.params.seriesID)
+        let comicsDocuments = await marvel.getComicsForSeries(request.params.seriesID);
         console.log("[Tracking] GET")
         return response.send(comicsDocuments);
     });

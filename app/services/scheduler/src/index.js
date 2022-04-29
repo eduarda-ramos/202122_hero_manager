@@ -2,11 +2,7 @@ const express = require('express');
 const mongo = require('./database.js');
 const agenda = require('./agenda.js');
 
-
 const PORT = process.env.PORT || 8080;
-//const JWT_SECRET = process.env.JWT_SECRET || 'secret';
-
-
 
 const start = async() => {
     console.log("Starting Node Server")

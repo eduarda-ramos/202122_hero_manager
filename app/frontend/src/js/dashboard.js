@@ -1,7 +1,6 @@
 //###############
 //CHANGE ME
 const BACKEND_URL = 'http://localhost:8081';
-const MARVEL_API_URL = 'http://localhost:8082';
 //###############
 
 const processStatistics = (data) => {

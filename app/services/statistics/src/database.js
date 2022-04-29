@@ -13,6 +13,8 @@ const mongoDBOptions = {
     useNewUrlParser: true
 }
 
+const APP_USER_PASS = process.env.APP_USER_PASS || 'password';
+
 const connect = () => {
     let db;
     let client;
@@ -42,54 +44,43 @@ const connect = () => {
     })
 }
 
-const getSeries = (db) => {
+const insertStatistics = (db, statistics) => {
     return new Promise((resolve, reject) => {
-        const series = db.collection('series');
-        series.find({}).toArray((err, docs) => {
-            if (err) return reject(err);
-            return resolve(docs);
-        });
-    });
-}
-
-
-
-const getComic = (db, id) => {
-    return new Promise((resolve, reject) => {
-        const comics = db.collection('comics');
-        comics.findOne({ id: id }, (err, doc) => {
-            if (err) return reject(err);
-            return resolve(doc);
-        });
-    });
-}
-
-const insertComic = (db, comic) => {
-    return new Promise((resolve, reject) => {
-        const comics = db.collection('comics');
-
-        comics.insertOne(comic, (err, result) => {
+        const statisticsCollection = db.collection('statistics');
+        statistics.date = new Date()
+        statisticsCollection.insertOne(statistics, (err, result) => {
             if (err) return reject(err);
             return resolve(result);
         });
     });
 }
 
-const getComics = (db) => {
+const getStatistics = (db) => {
     return new Promise((resolve, reject) => {
-        const comics = db.collection('comics');
-        comics.find({}).toArray((err, documents) => {
+        const statistics = db.collection('statistics');
+        statistics.find({}).sort({ date: -1 }).toArray((err, documents) => {
             if (err) return reject(err);
             return resolve(documents);
         });
     });
 }
 
+const getStatisticsLatest = (db) => {
+    return new Promise((resolve, reject) => {
+        const statistics = db.collection('statistics');
+        let lastWeek = new Date();
+        lastWeek.setDate(lastWeek.getDate() - 7);
+        lastWeek.setHours(0, 0, 0, 0);
+        statistics.find({ date: { $gte: lastWeek } }).sort({ date: -1 }).toArray((err, documents) => {
+            if (err) return reject(err);
+            return resolve(documents);
+        });
+    });
+}
 
 module.exports = {
     connect: connect,
-    getSeries: getSeries,
-    insertComic: insertComic,
-    getComic: getComic,
-    getComics: getComics,
+    insertStatistics: insertStatistics,
+    getStatistics: getStatistics,
+    getStatisticsLatest: getStatisticsLatest
 }
