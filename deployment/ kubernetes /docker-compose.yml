@@ -1,0 +1,28 @@
+services:
+    hero_manager_database:
+        image: mongo
+    hero_manager_backend:
+        image: hero_manager_backend_image
+        build:
+            context: ../../app/backend/
+            dockerfile: ../../deployment/local/backend/Dockerfile
+    hero_manager_frontend:
+        image: hero_manager_frontend_image
+        build:
+            context: ../../app/frontend/
+            dockerfile: ../../deployment/local/frontend/Dockerfile
+    hero_manager_marvel:
+        image: hero_manager_marvel_image
+        build:
+            context: ../../app/services/marvel/
+            dockerfile: ../../../deployment/local/services/marvel/Dockerfile
+    hero_manager_statistics:
+        image: hero_manager_statistics_image
+        build:
+            context: ../../app/services/statistics/
+            dockerfile: ../../../deployment/local/services/statistics/Dockerfile
+    hero_manager_scheduler:
+        image: hero_manager_scheduler_image
+        build:
+            context: ../../app/services/scheduler/
+            dockerfile: ../../../deployment/local/services/scheduler/Dockerfile

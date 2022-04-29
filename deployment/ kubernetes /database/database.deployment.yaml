@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hero-manager-backend
+  name: hero-manager-database
   labels:
-    name: hero-manager-backend
+    name: hero-manager-database
 spec:
   selector:
     matchLabels:
-      name: hero-manager-backend
+      name: hero-manager-database
   replicas: 1
   template:
     metadata:
       labels:
-        name: hero-manager-backend
+        name: hero-manager-database
     spec:
       containers:
-        - name: hero-manager-backend
-          image: docker.io/library/hero_manager_backend_image
+        - name: hero-manager-database
+          image: docker.io/library/hero_manager_database_image
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8081
+            - containerPort: 27017
           resources: {}
           env:
             - name: DB_HOST

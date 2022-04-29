@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hero-manager-backend
+  name: hero-manager-marvel
   labels:
-    name: hero-manager-backend
+    name: hero-manager-marvel
 spec:
   selector:
     matchLabels:
-      name: hero-manager-backend
+      name: hero-manager-marvel
   replicas: 1
   template:
     metadata:
       labels:
-        name: hero-manager-backend
+        name: hero-manager-marvel
     spec:
       containers:
-        - name: hero-manager-backend
-          image: docker.io/library/hero_manager_backend_image
+        - name: hero-manager-marvel
+          image: docker.io/library/hero_manager_marvel_image
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8081
+            - containerPort: 8082
           resources: {}
           env:
-            - name: DB_HOST
-              value: hero-manager-database
-            - name: DB_PORT
-              value: "27017"
-            - name: DB_NAME
-              value: heroManager
+            - name: MARVEL_PUBLIC_KEY
+              value: "fa65f9ca2264dd9740c05eb4719b6f5b"
+            - name: MARVEL_PRIVATE_KEY
+              value: "ac9e48d217bf08cde8b88f3"
             - name: PORT
-              value: "8081"
+              value: "8082"
+            - name: MARVEL_URL
+              value: "https://gateway.marvel.com"
