@@ -23,9 +23,9 @@ spec:
           resources: {}
           env:
             - name: MARVEL_PUBLIC_KEY
-              value: "fa65f9ca2264dd9740c05eb4719b6f5b"
+              value: "636a455163d87dd1d2c44ae8132498c6"
             - name: MARVEL_PRIVATE_KEY
-              value: "ac9e48d217bf08cde8b88f3"
+              value: "680acc65956d512d991e26827dfbe2d392aeb64b"
             - name: PORT
               value: "8082"
             - name: MARVEL_URL

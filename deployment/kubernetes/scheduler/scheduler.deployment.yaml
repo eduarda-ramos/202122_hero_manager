@@ -29,5 +29,9 @@ spec:
             - name: DB_NAME
               value: heroManager
             - name: PORT
-              value: "8081"
+              value: "8084"
+            - name: MARVEL_API_URL
+              value: "http://hero-manager-marvel:8082"
+            - name: STATISTICS_API_URL
+              value: "http://hero-manager-statistics:8083"
             
