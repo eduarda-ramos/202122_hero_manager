@@ -5,24 +5,24 @@ services:
         image: hero_manager_backend_image
         build:
             context: ../../app/backend/
-            dockerfile: ../../deployment/kubernetes/backend/Dockerfile
+            dockerfile: ../../deployment/kubernetes/services/backend/Dockerfile
     hero_manager_frontend:
         image: hero_manager_frontend_image
         build:
             context: ../../app/frontend/
-            dockerfile: ../../deployment/kubernetes/frontend/Dockerfile
+            dockerfile: ../../deployment/kubernetes/services/frontend/Dockerfile
     hero_manager_marvel:
         image: hero_manager_marvel_image
         build:
             context: ../../app/services/marvel/
-            dockerfile: ../../../deployment/kubernetes/marvel/Dockerfile
+            dockerfile: ../../../deployment/kubernetes/services/marvel/Dockerfile
     hero_manager_statistics:
         image: hero_manager_statistics_image
         build:
             context: ../../app/services/statistics/
-            dockerfile: ../../../deployment/kubernetes/statistics/Dockerfile
+            dockerfile: ../../../deployment/kubernetes/services/statistics/Dockerfile
     hero_manager_scheduler:
         image: hero_manager_scheduler_image
         build:
             context: ../../app/services/scheduler/
-            dockerfile: ../../../deployment/kubernetes/scheduler/Dockerfile
+            dockerfile: ../../../deployment/kubernetes/services/scheduler/Dockerfile
